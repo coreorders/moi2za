@@ -11,12 +11,18 @@ table.month { width: 100%; max-width: 1000px; margin: 0 auto; background: white;
 table.month th { background: #001f3f; color: white; padding: 15px; text-transform: uppercase; }
 table.month td { border: 1px solid #e0e0e0; transition: background 0.2s; }
 table.month td:hover { background: #f0f8ff; }
+@media (max-width: 768px) {
+    .summary-box { flex-direction: column; gap: 15px; }
+    body { padding: 20px; }
+    .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
 </style></head><body>
 <div class="header"><h1>moi2za <span>HTS Calendar</span></h1><p>일일 투자 리포트 및 수익률 아카이브</p></div>
 <div class="summary-box">
 <div class="stat"><h3 style="color:#666; margin-bottom:5px;">현재 총 자산</h3><div style="font-size:32px; font-weight:bold; color:#001f3f;">$10,000.00</div></div>
 <div class="stat"><h3 style="color:#666; margin-bottom:5px;">누적 투자 수익률</h3><div style="font-size:32px; font-weight:bold; color:green;">+0.00%</div></div>
 </div>
+<div class="table-responsive">
 <table border="0" cellpadding="0" cellspacing="0" class="month">
 <tr><th colspan="7" class="month">June 2026</th></tr>
 <tr><th class="sun">Sun</th><th class="mon">Mon</th><th class="tue">Tue</th><th class="wed">Wed</th><th class="thu">Thu</th><th class="fri">Fri</th><th class="sat">Sat</th></tr>
@@ -32,4 +38,5 @@ table.month td:hover { background: #f0f8ff; }
 <tr><td class="sun" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>28</td><td class="mon" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>29</td><td class="tue" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>30</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td></tr>
 </table>
 
+</div>
 </body></html>
