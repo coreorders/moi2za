@@ -1,57 +1,198 @@
 
-<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=1400">
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wall Street VVIP | Calendar Dashboard</title>
 <style>
 body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f8f9fa; padding: 40px; color: #333; }
-.header { text-align: center; margin-bottom: 40px; }
-.header h1 { font-size: 36px; color: #001f3f; }
-.summary-box { display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; }
-.stat { background: white; padding: 20px 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; border-bottom: 4px solid #ff851b; }
-table.month { width: 100%; max-width: 1000px; margin: 0 auto; background: white; border-collapse: collapse; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+.header { text-align: center; margin-bottom: 34px; }
+.header h1 { font-size: 36px; color: #001f3f; margin-bottom: 6px; }
+.header p { color:#667085; margin: 0; }
+.summary-box, .month-summary { display: flex; justify-content: center; gap: 18px; margin-bottom: 28px; flex-wrap: wrap; }
+.stat { background: white; padding: 20px 36px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; border-bottom: 4px solid #ff851b; min-width: 220px; }
+.stat.mini { padding: 15px 20px; min-width: 170px; border-bottom-width: 3px; }
+.stat h3 { color:#666; margin: 0 0 5px; font-size: 14px; }
+.value { font-size: 28px; font-weight: 800; color:#001f3f; }
+.stat.mini .value { font-size: 18px; }
+.green { color: green !important; }
+.red { color: red !important; }
+.gray { color: gray !important; }
+.month-tabs { max-width: 1100px; margin: 0 auto 22px; text-align: center; }
+.month-tabs input { position:absolute; opacity:0; pointer-events:none; }
+.month-tabs label { display:inline-block; margin: 4px; padding: 10px 16px; border-radius: 999px; background:#fff; border:1px solid #d0d5dd; color:#001f3f; font-weight:700; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.04); }
+.month-tabs input:checked + label { background:#001f3f; color:#fff; border-color:#001f3f; }
+.month-panel { display:none; }
+.month-panels { max-width: 1120px; margin: 0 auto; }
+#month-2026-07:checked ~ .month-panels .panel-0 { display:block; }#month-2026-06:checked ~ .month-panels .panel-1 { display:block; }
+table.month { width: 100%; margin: 0 auto; background: white; border-collapse: collapse; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 table.month th { background: #001f3f; color: white; padding: 15px; text-transform: uppercase; }
-table.month td { border: 1px solid #e0e0e0; transition: background 0.2s; }
+table.month td { border: 1px solid #e0e0e0; transition: background 0.2s; height: 90px; width: 14%; vertical-align: top; }
 table.month td:hover { background: #f0f8ff; }
+.day-cell { position: relative; padding: 7px; }
+.day-num { font-weight: 800; color:#001f3f; }
+.empty-day .day-num { color:#98a2b3; }
+.noday { background:#f2f4f7; }
+.report-link { display:block; text-align:center; text-decoration:none; margin-top: 10px; }
+.roi-pill { color:white; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:12px; display:inline-block; }
+.roi-pill.green { background:green; color:white !important; }
+.roi-pill.red { background:red; color:white !important; }
+.roi-pill.gray { background:gray; color:white !important; }
+.view-link { font-size:10px; color:#555; text-decoration:underline; margin-top:5px; display:inline-block; }
+@media (max-width: 760px) { body { padding: 18px; } .header h1 { font-size: 27px; } .summary-box, .month-summary { display:grid; grid-template-columns:1fr; } .stat { min-width: 0; } .table-responsive { overflow-x:auto; } table.month { min-width: 760px; } }
 </style></head><body>
-<div class="header"><h1>moi2za <span>HTS Calendar</span></h1><p>일일 투자 리포트 및 수익률 아카이브</p></div>
+<div class="header"><h1>moi2za <span>HTS Calendar</span></h1><p>월별 선택 가능한 일일 투자 리포트 및 수익률 아카이브</p></div>
 <div class="summary-box">
-<div class="stat"><h3 style="color:#666; margin-bottom:5px;">현재 총 자산</h3><div style="font-size:32px; font-weight:bold; color:#001f3f;">$11,657.65</div></div>
-<div class="stat"><h3 style="color:#666; margin-bottom:5px;">누적 투자 수익률</h3><div style="font-size:32px; font-weight:bold; color:green;">+16.58%</div></div>
+<div class="stat"><h3>현재 총 자산</h3><div class="value">$11,657.65</div></div>
+<div class="stat"><h3>누적 투자 수익률</h3><div class="value green">+16.58%</div></div>
+<div class="stat"><h3>2026년 06월 수익률</h3><div class="value green">+19.34%</div></div>
+<div class="stat"><h3>2026년 07월 수익률</h3><div class="value red">-2.31%</div></div>
 </div>
-<div class="table-responsive">
-<table border="0" cellpadding="0" cellspacing="0" class="month">
-<tr><th colspan="7" class="month">July 2026</th></tr>
-<tr><th class="sun">Sun</th><th class="mon">Mon</th><th class="tue">Tue</th><th class="wed">Wed</th><th class="thu">Thu</th><th class="fri">Fri</th><th class="sat">Sat</th></tr>
-<tr><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="wed" style="position:relative; height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee;">
-            <div style="font-weight:bold;">1</div>
-            <a href="2026-07-01.html" style="display:block; text-align:center; text-decoration:none; margin-top:10px;">
-                <span style="background-color:red; color:white; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:12px;">-1.10%</span><br>
-                <span style="font-size:10px; color:#555; text-decoration:underline; margin-top:5px; display:inline-block;">View Report & HTS</span>
-            </a></td><td class="thu" style="position:relative; height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee;">
-            <div style="font-weight:bold;">2</div>
-            <a href="2026-07-02.html" style="display:block; text-align:center; text-decoration:none; margin-top:10px;">
-                <span style="background-color:green; color:white; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:12px;">+0.25%</span><br>
-                <span style="font-size:10px; color:#555; text-decoration:underline; margin-top:5px; display:inline-block;">View Report & HTS</span>
-            </a></td><td class="fri" style="position:relative; height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee;">
-            <div style="font-weight:bold;">3</div>
-            <a href="2026-07-03.html" style="display:block; text-align:center; text-decoration:none; margin-top:10px;">
-                <span style="background-color:red; color:white; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:12px;">-5.05%</span><br>
-                <span style="font-size:10px; color:#555; text-decoration:underline; margin-top:5px; display:inline-block;">View Report & HTS</span>
-            </a></td><td class="sat" style="position:relative; height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee;">
-            <div style="font-weight:bold;">4</div>
-            <a href="2026-07-04.html" style="display:block; text-align:center; text-decoration:none; margin-top:10px;">
-                <span style="background-color:green; color:white; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:12px;">+3.77%</span><br>
-                <span style="font-size:10px; color:#555; text-decoration:underline; margin-top:5px; display:inline-block;">View Report & HTS</span>
-            </a></td></tr>
-<tr><td class="sun" style="position:relative; height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee;">
-            <div style="font-weight:bold;">5</div>
-            <a href="2026-07-05.html" style="display:block; text-align:center; text-decoration:none; margin-top:10px;">
-                <span style="background-color:gray; color:white; padding:4px 8px; border-radius:4px; font-weight:bold; font-size:12px;">+0.00%</span><br>
-                <span style="font-size:10px; color:#555; text-decoration:underline; margin-top:5px; display:inline-block;">View Report & HTS</span>
-            </a></td><td class="mon" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>6</td><td class="tue" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>7</td><td class="wed" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>8</td><td class="thu" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>9</td><td class="fri" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>10</td><td class="sat" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>11</td></tr>
-<tr><td class="sun" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>12</td><td class="mon" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>13</td><td class="tue" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>14</td><td class="wed" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>15</td><td class="thu" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>16</td><td class="fri" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>17</td><td class="sat" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>18</td></tr>
-<tr><td class="sun" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>19</td><td class="mon" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>20</td><td class="tue" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>21</td><td class="wed" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>22</td><td class="thu" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>23</td><td class="fri" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>24</td><td class="sat" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>25</td></tr>
-<tr><td class="sun" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>26</td><td class="mon" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>27</td><td class="tue" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>28</td><td class="wed" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>29</td><td class="thu" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>30</td><td class="fri" style='height:80px; width:14%; vertical-align:top; padding:5px; border:1px solid #eee; color:#999;'>31</td><td class="noday">&nbsp;</td></tr>
-</table>
-
+<div class="month-tabs">
+<input type="radio" name="month-tab" id="month-2026-07" checked><label for="month-2026-07">2026년 07월</label><input type="radio" name="month-tab" id="month-2026-06"><label for="month-2026-06">2026년 06월</label>
+<div class="month-panels">
+<section class="month-panel panel-0">
+        <div class="month-summary">
+            <div class="stat mini"><h3>월간 수익률</h3><div class="value red">-2.31%</div></div>
+            <div class="stat mini"><h3>월말/최근 자산</h3><div class="value">$11,657.65</div></div>
+            <div class="stat mini"><h3>기록일 수</h3><div class="value">5일</div></div>
+            <div class="stat mini"><h3>최고 일일 수익률</h3><div class="value green">2026-07-04 · +3.77%</div></div>
+            <div class="stat mini"><h3>최저 일일 수익률</h3><div class="value red">2026-07-03 · -5.05%</div></div>
+        </div>
+        <div class="table-responsive"><table class="month"><tr><th colspan="7" class="month">2026년 07월</th></tr><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr><tr><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="day-cell has-report">
+                    <div class="day-num">1</div>
+                    <a href="2026-07-01.html" class="report-link">
+                        <span class="roi-pill red">-1.10%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">2</div>
+                    <a href="2026-07-02.html" class="report-link">
+                        <span class="roi-pill green">+0.25%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">3</div>
+                    <a href="2026-07-03.html" class="report-link">
+                        <span class="roi-pill red">-5.05%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">4</div>
+                    <a href="2026-07-04.html" class="report-link">
+                        <span class="roi-pill green">+3.77%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td></tr><tr><td class="day-cell has-report">
+                    <div class="day-num">5</div>
+                    <a href="2026-07-05.html" class="report-link">
+                        <span class="roi-pill gray">+0.00%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell empty-day"><div class="day-num">6</div></td><td class="day-cell empty-day"><div class="day-num">7</div></td><td class="day-cell empty-day"><div class="day-num">8</div></td><td class="day-cell empty-day"><div class="day-num">9</div></td><td class="day-cell empty-day"><div class="day-num">10</div></td><td class="day-cell empty-day"><div class="day-num">11</div></td></tr><tr><td class="day-cell empty-day"><div class="day-num">12</div></td><td class="day-cell empty-day"><div class="day-num">13</div></td><td class="day-cell empty-day"><div class="day-num">14</div></td><td class="day-cell empty-day"><div class="day-num">15</div></td><td class="day-cell empty-day"><div class="day-num">16</div></td><td class="day-cell empty-day"><div class="day-num">17</div></td><td class="day-cell empty-day"><div class="day-num">18</div></td></tr><tr><td class="day-cell empty-day"><div class="day-num">19</div></td><td class="day-cell empty-day"><div class="day-num">20</div></td><td class="day-cell empty-day"><div class="day-num">21</div></td><td class="day-cell empty-day"><div class="day-num">22</div></td><td class="day-cell empty-day"><div class="day-num">23</div></td><td class="day-cell empty-day"><div class="day-num">24</div></td><td class="day-cell empty-day"><div class="day-num">25</div></td></tr><tr><td class="day-cell empty-day"><div class="day-num">26</div></td><td class="day-cell empty-day"><div class="day-num">27</div></td><td class="day-cell empty-day"><div class="day-num">28</div></td><td class="day-cell empty-day"><div class="day-num">29</div></td><td class="day-cell empty-day"><div class="day-num">30</div></td><td class="day-cell empty-day"><div class="day-num">31</div></td><td class="noday">&nbsp;</td></tr></table></div>
+    </section><section class="month-panel panel-1">
+        <div class="month-summary">
+            <div class="stat mini"><h3>월간 수익률</h3><div class="value green">+19.34%</div></div>
+            <div class="stat mini"><h3>월말/최근 자산</h3><div class="value">$11,933.72</div></div>
+            <div class="stat mini"><h3>기록일 수</h3><div class="value">16일</div></div>
+            <div class="stat mini"><h3>최고 일일 수익률</h3><div class="value green">2026-06-17 · +9.80%</div></div>
+            <div class="stat mini"><h3>최저 일일 수익률</h3><div class="value red">2026-06-24 · -5.26%</div></div>
+        </div>
+        <div class="table-responsive"><table class="month"><tr><th colspan="7" class="month">2026년 06월</th></tr><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr><tr><td class="noday">&nbsp;</td><td class="day-cell empty-day"><div class="day-num">1</div></td><td class="day-cell empty-day"><div class="day-num">2</div></td><td class="day-cell empty-day"><div class="day-num">3</div></td><td class="day-cell empty-day"><div class="day-num">4</div></td><td class="day-cell empty-day"><div class="day-num">5</div></td><td class="day-cell empty-day"><div class="day-num">6</div></td></tr><tr><td class="day-cell empty-day"><div class="day-num">7</div></td><td class="day-cell empty-day"><div class="day-num">8</div></td><td class="day-cell empty-day"><div class="day-num">9</div></td><td class="day-cell empty-day"><div class="day-num">10</div></td><td class="day-cell empty-day"><div class="day-num">11</div></td><td class="day-cell empty-day"><div class="day-num">12</div></td><td class="day-cell empty-day"><div class="day-num">13</div></td></tr><tr><td class="day-cell empty-day"><div class="day-num">14</div></td><td class="day-cell has-report">
+                    <div class="day-num">15</div>
+                    <a href="2026-06-15.html" class="report-link">
+                        <span class="roi-pill gray">+0.00%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">16</div>
+                    <a href="2026-06-16.html" class="report-link">
+                        <span class="roi-pill green">+4.22%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">17</div>
+                    <a href="2026-06-17.html" class="report-link">
+                        <span class="roi-pill green">+9.80%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">18</div>
+                    <a href="2026-06-18.html" class="report-link">
+                        <span class="roi-pill red">-1.55%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">19</div>
+                    <a href="2026-06-19.html" class="report-link">
+                        <span class="roi-pill green">+4.11%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">20</div>
+                    <a href="2026-06-20.html" class="report-link">
+                        <span class="roi-pill green">+1.25%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td></tr><tr><td class="day-cell has-report">
+                    <div class="day-num">21</div>
+                    <a href="2026-06-21.html" class="report-link">
+                        <span class="roi-pill gray">-0.00%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">22</div>
+                    <a href="2026-06-22.html" class="report-link">
+                        <span class="roi-pill gray">-0.00%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">23</div>
+                    <a href="2026-06-23.html" class="report-link">
+                        <span class="roi-pill green">+7.52%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">24</div>
+                    <a href="2026-06-24.html" class="report-link">
+                        <span class="roi-pill red">-5.26%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">25</div>
+                    <a href="2026-06-25.html" class="report-link">
+                        <span class="roi-pill red">-1.42%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">26</div>
+                    <a href="2026-06-26.html" class="report-link">
+                        <span class="roi-pill green">+0.28%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">27</div>
+                    <a href="2026-06-27.html" class="report-link">
+                        <span class="roi-pill red">-2.93%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td></tr><tr><td class="day-cell has-report">
+                    <div class="day-num">28</div>
+                    <a href="2026-06-28.html" class="report-link">
+                        <span class="roi-pill green">+0.33%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">29</div>
+                    <a href="2026-06-29.html" class="report-link">
+                        <span class="roi-pill gray">-0.00%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="day-cell has-report">
+                    <div class="day-num">30</div>
+                    <a href="2026-06-30.html" class="report-link">
+                        <span class="roi-pill green">+2.45%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td></tr></table></div>
+    </section>
+</div>
 </div>
 </body></html>
