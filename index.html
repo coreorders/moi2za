@@ -21,7 +21,7 @@ body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f8f9fa; padding
 .month-tabs input:checked + label { background:#001f3f; color:#fff; border-color:#001f3f; }
 .month-panel { display:none; }
 .month-panels { max-width: 1120px; margin: 0 auto; }
-#month-2026-07:checked ~ .month-panels .panel-0 { display:block; }#month-2026-06:checked ~ .month-panels .panel-1 { display:block; }
+#month-2026-08:checked ~ .month-panels .panel-0 { display:block; }#month-2026-07:checked ~ .month-panels .panel-1 { display:block; }#month-2026-06:checked ~ .month-panels .panel-2 { display:block; }
 table.month { width: 100%; margin: 0 auto; background: white; border-collapse: collapse; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 table.month th { background: #001f3f; color: white; padding: 15px; text-transform: uppercase; }
 table.month td { border: 1px solid #e0e0e0; transition: background 0.2s; height: 90px; width: 14%; vertical-align: top; }
@@ -47,15 +47,30 @@ table.month td:hover { background: #f0f8ff; }
 </style></head><body>
 <div class="header"><h1>moi2za <span>HTS Calendar</span></h1><p>월별 선택 가능한 일일 투자 리포트 및 수익률 아카이브</p></div>
 <div class="summary-box">
-<div class="stat"><h3>현재 총 자산</h3><div class="value">$12,153.84</div></div>
-<div class="stat"><h3>누적 투자 수익률</h3><div class="value green">+21.54%</div></div>
-<div class="stat"><h3>2026년 06월 수익률</h3><div class="value green">+19.34%</div></div>
+<div class="stat"><h3>현재 총 자산</h3><div class="value">$11,425.81</div></div>
+<div class="stat"><h3>누적 투자 수익률</h3><div class="value green">+14.26%</div></div>
 <div class="stat"><h3>2026년 07월 수익률</h3><div class="value green">+1.84%</div></div>
+<div class="stat"><h3>2026년 08월 수익률</h3><div class="value red">-5.99%</div></div>
 </div>
 <div class="month-tabs">
-<input type="radio" name="month-tab" id="month-2026-07" checked><label for="month-2026-07">2026년 07월</label><input type="radio" name="month-tab" id="month-2026-06"><label for="month-2026-06">2026년 06월</label>
+<input type="radio" name="month-tab" id="month-2026-08" checked><label for="month-2026-08">2026년 08월</label><input type="radio" name="month-tab" id="month-2026-07"><label for="month-2026-07">2026년 07월</label><input type="radio" name="month-tab" id="month-2026-06"><label for="month-2026-06">2026년 06월</label>
 <div class="month-panels">
 <section class="month-panel panel-0">
+        <div class="month-summary">
+            <div class="stat mini"><h3>월간 수익률</h3><div class="value red">-5.99%</div></div>
+            <div class="stat mini"><h3>월말/최근 자산</h3><div class="value">$11,425.81</div></div>
+            <div class="stat mini"><h3>기록일 수</h3><div class="value">1일</div></div>
+            <div class="stat mini"><h3>최고 일일 수익률</h3><div class="value green">2026-08-01 · -5.99%</div></div>
+            <div class="stat mini"><h3>최저 일일 수익률</h3><div class="value red">2026-08-01 · -5.99%</div></div>
+        </div>
+        <div class="table-responsive"><table class="month"><tr><th colspan="7" class="month">2026년 08월</th></tr><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr><tr><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="day-cell has-report">
+                    <div class="day-num">1</div>
+                    <a href="2026-08-01.html" class="report-link">
+                        <span class="roi-pill red">-5.99%</span>
+                        <span class="view-link">View Report & HTS</span>
+                    </a>
+                </td></tr><tr><td class="day-cell empty-day"><div class="day-num">2</div></td><td class="day-cell empty-day"><div class="day-num">3</div></td><td class="day-cell empty-day"><div class="day-num">4</div></td><td class="day-cell empty-day"><div class="day-num">5</div></td><td class="day-cell empty-day"><div class="day-num">6</div></td><td class="day-cell empty-day"><div class="day-num">7</div></td><td class="day-cell empty-day"><div class="day-num">8</div></td></tr><tr><td class="day-cell empty-day"><div class="day-num">9</div></td><td class="day-cell empty-day"><div class="day-num">10</div></td><td class="day-cell empty-day"><div class="day-num">11</div></td><td class="day-cell empty-day"><div class="day-num">12</div></td><td class="day-cell empty-day"><div class="day-num">13</div></td><td class="day-cell empty-day"><div class="day-num">14</div></td><td class="day-cell empty-day"><div class="day-num">15</div></td></tr><tr><td class="day-cell empty-day"><div class="day-num">16</div></td><td class="day-cell empty-day"><div class="day-num">17</div></td><td class="day-cell empty-day"><div class="day-num">18</div></td><td class="day-cell empty-day"><div class="day-num">19</div></td><td class="day-cell empty-day"><div class="day-num">20</div></td><td class="day-cell empty-day"><div class="day-num">21</div></td><td class="day-cell empty-day"><div class="day-num">22</div></td></tr><tr><td class="day-cell empty-day"><div class="day-num">23</div></td><td class="day-cell empty-day"><div class="day-num">24</div></td><td class="day-cell empty-day"><div class="day-num">25</div></td><td class="day-cell empty-day"><div class="day-num">26</div></td><td class="day-cell empty-day"><div class="day-num">27</div></td><td class="day-cell empty-day"><div class="day-num">28</div></td><td class="day-cell empty-day"><div class="day-num">29</div></td></tr><tr><td class="day-cell empty-day"><div class="day-num">30</div></td><td class="day-cell empty-day"><div class="day-num">31</div></td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td><td class="noday">&nbsp;</td></tr></table></div>
+    </section><section class="month-panel panel-1">
         <div class="month-summary">
             <div class="stat mini"><h3>월간 수익률</h3><div class="value green">+1.84%</div></div>
             <div class="stat mini"><h3>월말/최근 자산</h3><div class="value">$12,153.84</div></div>
@@ -250,7 +265,7 @@ table.month td:hover { background: #f0f8ff; }
                         <span class="view-link">View Report & HTS</span>
                     </a>
                 </td><td class="noday">&nbsp;</td></tr></table></div>
-    </section><section class="month-panel panel-1">
+    </section><section class="month-panel panel-2">
         <div class="month-summary">
             <div class="stat mini"><h3>월간 수익률</h3><div class="value green">+19.34%</div></div>
             <div class="stat mini"><h3>월말/최근 자산</h3><div class="value">$11,933.72</div></div>
